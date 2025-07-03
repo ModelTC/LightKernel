@@ -32,8 +32,9 @@ LightLLM-Kernel serves as the computational backbone for LightLLM framework, off
 
 #### Static Compilation (Recommended)
 ```bash
-git clone https://github.com/YourUsername/lightllm_kernel.git
-cd lightllm_kernel
-make build
-# Alternative using pip
 pip install .
+```
+#### Build only a wheel package
+```bash
+python -m build --wheel
+```

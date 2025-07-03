@@ -26,11 +26,11 @@ lightllm_kernel 提供了静态编译以及JIT（Just-In-Time）动态编译的�
 
 #### Static Compilation (Recommended)
 ```bash
-git clone https://github.com/YourUsername/lightllm_kernel.git
-cd lightllm_kernel
-make build
-# Alternative using pip
 pip install .
+```
+#### Build only a wheel package
+```bash
+python -m build --wheel
 ```
 
 ## 贡献指南
