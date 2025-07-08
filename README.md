@@ -1,8 +1,8 @@
-# LightLLM-Kernel
+# Light-Kernel
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-LightLLM-Kernel is a high-performance CUDA kernel library powering the LightLLM inference system. It provides optimized GPU implementations for critical operations in large language model (LLM) inference, delivering significant performance improvements through carefully crafted CUDA kernels.
+Light-Kernel is a high-performance CUDA kernel library powering the LightLLM inference system. It provides optimized GPU implementations for critical operations in large language model (LLM) inference, delivering significant performance improvements through carefully crafted CUDA kernels.
 
 ## Project Overview
 
