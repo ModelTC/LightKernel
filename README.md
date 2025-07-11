@@ -32,7 +32,7 @@ LightLLM-Kernel serves as the computational backbone for LightLLM framework, off
 
 #### Static Compilation (Recommended)
 ```bash
-pip install .
+pip install -v .
 ```
 #### Build only a wheel package
 ```bash

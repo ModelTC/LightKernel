@@ -54,7 +54,6 @@ cmake.verbose = true
 
 cmake.args = ["-DCMAKE_CUDA_ARCHITECTURES=80;86;89;90"]
 
-wheel.py-api = "cp39"
 wheel.packages = ["lightllm_kernel"]
 wheel.license-files = ["LICENSE"]
 
