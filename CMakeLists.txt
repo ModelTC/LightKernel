@@ -40,6 +40,8 @@ if (NOT TARGET _C)
   set_target_properties(_C PROPERTIES
       PREFIX ""
       OUTPUT_NAME "_C"
+      LIBRARY_OUTPUT_DIRECTORY          # ~E~T~A~J~J .so ~T~H~L~E~[~U
+        ${PROJECT_SOURCE_DIR}/lightllm_kernel
       BUILD_RPATH "\$ORIGIN;\$ORIGIN/../torch/lib"
       INSTALL_RPATH "\$ORIGIN;\$ORIGIN/../torch/lib"
   )
