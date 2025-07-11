@@ -1,7 +1,20 @@
 import importlib
 import os
+import ctypes
+import torch
 from pathlib import Path
 from torch.utils.cpp_extension import load
+
+# -------- 预加载 libtorch_python.so --------
+_libtorch_py = os.path.join(os.path.dirname(torch.__file__),
+                            "lib", "libtorch_python.so")
+try:
+    ctypes.CDLL(_libtorch_py, mode=ctypes.RTLD_GLOBAL)
+except OSError:
+    # 极少数发行版名字可能不同，找不到就静默跳过
+    pass
+# ------------------------------------------
+
 
 PKG = "lightllm_kernel"
 try:

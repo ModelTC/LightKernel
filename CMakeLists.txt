@@ -26,7 +26,7 @@ if (NOT TARGET _C)
     ${CUDAToolkit_INCLUDE_DIRS}
     ${PROJECT_SOURCE_DIR}/include
     ${PROJECT_SOURCE_DIR}/csrc
-    ${PROJECT_SOURCE_DIR}/../third-party/cutlass/include
+    ${PROJECT_SOURCE_DIR}/third-party/cutlass/include
   )
   target_link_libraries(_C
       PRIVATE
