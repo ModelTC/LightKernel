@@ -1,0 +1,267 @@
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+Thread 0: tScS shape: Thread 1: tScS shape: Thread 2: tScS shape: Thread 3: tScS shape: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111)))), tScS layout: , tScS layout: , tScS layout: , tScS layout: ((((((((____2222,,,,____2222,,,,____8888)))),,,,____1111,,,,____1111))))::::((((((((____1111@1@1@1@1,,,,____8888@0@0@0@0,,,,____8888@1@1@1@1)))),,,,____0000,,,,____0000))))
+
+
+
+Thread 0 Layout Conversion:
+  Original tSrS layout: ((_2,_2,_8),_1,_1):((_1,_2,_4),_0,_0)
+  Converted tSrS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_2,_0),(_1,_4,_0))
+  Original tScS layout: ((_2,_2,_8),_1,_1):((_1@1,_8@0,_8@1),_0,_0)
+  Converted tScS_rowcol layout: ((_2,_1),(_2,_8,_1)):((_8@0,_0),(_1@1,_8@1,_0))
+Thread 0 coordinates (first 8 elements): (0,0) (8,0) (0,1) (8,1) (0,8) (8,8) (0,9) (8,9) 
+Thread 1 coordinates (first 8 elements): (0,2) (8,2) (0,3) (8,3) (0,10) (8,10) (0,11) (8,11) 
+All close
+Tile-lang: 6.13 ms
+Tile-lang: 0.00 TFlops

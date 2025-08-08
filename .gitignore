@@ -1,0 +1,4 @@
+lightllm_kernel/_C.so
+**/dist/
+**/build/
+**/*.egg-info/

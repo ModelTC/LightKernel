@@ -3,7 +3,6 @@ requires = [
   "scikit-build-core>=0.10",
   "cmake>=3.22",
   "ninja",
-  "torch>=2.6.0",
   "wheel",
 ]
 build-backend = "scikit_build_core.build"
