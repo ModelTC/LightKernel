@@ -46,7 +46,7 @@ RUN pip install torch==2.7.1
 # Install build dependencies
 RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja
 
-RUN git clone https://github.com/ModelTC/LightKernel.git
+RUN git clone https://github.com/ModelTC/LightKernel.git && cd LightKernel
 
 # Set environment variables for building
 ENV FLASH_ATTENTION_FORCE_BUILD=TRUE \
