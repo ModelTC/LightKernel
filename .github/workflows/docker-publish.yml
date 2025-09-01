@@ -1,0 +1,163 @@
+name: Docker
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ 'v*.*.*' ]
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+
+    timeout-minutes: 600
+
+    steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          swap-storage: false
+          docker-images: false
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Add Swap
+        run: |
+          SWAP_FILE="/mnt/swapfile"
+          
+          swapon --show
+          echo "Trying to disable and remove existing swap if needed..."
+          if swapon --show=NAME | grep -q "$SWAP_FILE"; then
+            echo "Disabling existing swap at $SWAP_FILE..."
+            sudo swapoff "$SWAP_FILE"
+          fi
+
+          if [ -f "$SWAP_FILE" ]; then
+            echo "Removing existing file at $SWAP_FILE..."
+            sudo rm -f "$SWAP_FILE"
+          fi
+
+          echo "Creating new 32G swap file..."
+          sudo dd if=/dev/zero of=$SWAP_FILE bs=1G count=32
+          sudo chmod 600 "$SWAP_FILE"
+          sudo mkswap "$SWAP_FILE"
+          sudo swapon "$SWAP_FILE"
+
+          echo "Final swap status:"
+          swapon --show
+          free -h
+
+      - name: Install cosign
+        if: github.event_name != 'pull_request'
+        uses: sigstore/cosign-installer@v3.5.0
+
+      - name: Setup Docker buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker cache - restore
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.buildx-cache
+          key: buildx-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            buildx-${{ runner.os }}-
+
+      - name: Log into registry ${{ env.REGISTRY }}
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        id: build-and-push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+
+      - name: Sign the published Docker image
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          TAGS: ${{ steps.meta.outputs.tags }}
+          DIGEST: ${{ steps.build-and-push.outputs.digest }}
+        run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
+
+      - name: Export wheel from image
+        run: |
+          CONTAINER_TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
+          CONTAINER_ID=$(docker create $CONTAINER_TAG)
+          # Copy wheel files from the container to the local machine
+          docker cp "$CONTAINER_ID:/out" ./out
+          # Remove the container
+          docker rm "$CONTAINER_ID"
+          # Verify wheel file has been copied
+          echo "Exported wheel files:"
+          ls -la ./out
+          WHEEL_COUNT=$(ls -1 ./out/*.whl | wc -l)
+          echo "Total wheel files: $WHEEL_COUNT"
+
+      - name: Upload .whl to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG_NAME=${GITHUB_REF##*/}
+          
+          # Get wheel file information
+          LIGHTKERNEL_WHEEL=$(ls ./out/lightllm_kernel-*.whl | head -n1 | xargs basename)
+          FLASH_ATTN_WHEEL=$(ls ./out/flash_attn_3-*.whl | head -n1 | xargs basename)
+          
+          gh release create "$TAG_NAME" ./out/*.whl \
+            --title "LightKernel Release $TAG_NAME" \
+            --notes "🎯 **LightKernel Docker Release $TAG_NAME**
+
+          This automated release contains pre-compiled wheel packages:
+
+          📦 **Packages:**
+          - **$LIGHTKERNEL_WHEEL** - Core CUDA kernel library  
+          - **$FLASH_ATTN_WHEEL** - Flash Attention 3.0 (Hopper)
+
+          🚀 **Quick Installation:**
+          \`\`\`bash
+          # Install both packages
+          pip install https://github.com/${{ github.repository }}/releases/download/$TAG_NAME/$LIGHTKERNEL_WHEEL
+          pip install https://github.com/${{ github.repository }}/releases/download/$TAG_NAME/$FLASH_ATTN_WHEEL
+          \`\`\`
+
+          🔧 **Build Environment:**
+          - CUDA: 12.6.1 with cuDNN
+          - PyTorch: 2.7.1  
+          - Python: 3.10
+          - Architecture: CUDA Compute Capabilities 8.0, 8.6, 8.9, 9.0
+
+          🐳 **Docker Image:** \`${{ steps.meta.outputs.tags }}\`
+          
+          Built on $(date -u)" \
+            || echo "Release already exists, skipping" 
