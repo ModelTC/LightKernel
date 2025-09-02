@@ -49,18 +49,34 @@ RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject
 # Copy source code to container
 COPY . .
 
+# 🔧 设置 PyTorch 路径，让 CMake 能找到 Torch 配置
+# 获取 PyTorch 安装路径并设置 CMAKE_PREFIX_PATH
+RUN python -c "import torch; print(f'PyTorch installed at: {torch.__path__[0]}')" && \
+    TORCH_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_path)") && \
+    echo "Torch CMAKE path: $TORCH_PATH"
+
 # Set environment variables for building
 ENV FLASH_ATTENTION_FORCE_BUILD=TRUE \
     FLASH_ATTENTION_DISABLE_BACKWARD=TRUE \
     CUDA_HOME=/usr/local/cuda \
     CUDA_ROOT=/usr/local/cuda
 
+# 🎯 关键修复：设置 CMAKE_PREFIX_PATH 让 CMake 找到 PyTorch
+RUN TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_path)") && \
+    echo "export CMAKE_PREFIX_PATH=$TORCH_CMAKE_PATH:\$CMAKE_PREFIX_PATH" >> ~/.bashrc && \
+    echo "CMAKE_PREFIX_PATH=$TORCH_CMAKE_PATH" >> /etc/environment
+
 # Create output directory
 RUN mkdir -p /out
 
-# Build lightllm-kernel package (main project)
+# Build lightllm-kernel package (main project)  
+# 🎯 关键：在构建时设置 CMAKE_PREFIX_PATH，让 CMake 找到 PyTorch
 RUN echo "🔧 Building lightllm-kernel package..." && \
-    python -m build --wheel --outdir /out/ && \
+    echo "📋 Verifying PyTorch installation..." && \
+    python -c "import torch; print(f'PyTorch version: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CMake prefix path: {torch.utils.cmake_prefix_path}')" && \
+    TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_path)") && \
+    echo "🔧 Setting CMAKE_PREFIX_PATH to: $TORCH_CMAKE_PATH" && \
+    CMAKE_PREFIX_PATH="$TORCH_CMAKE_PATH:$CMAKE_PREFIX_PATH" python -m build --wheel --outdir /out/ && \
     echo "✅ lightllm-kernel build completed"
 
 # Build flash_attn_3 package (hopper)
