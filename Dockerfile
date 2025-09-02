@@ -82,7 +82,7 @@ RUN echo "🔧 Building lightllm-kernel package..." && \
 # Build flash_attn_3 package (hopper)
 RUN echo "🔧 Building flash_attn_3 package..." && \
     cd flash-attention/hopper && \
-    MAX_JOBS=1 NVCC_THREADS=1 FLASH_ATTN_CUDA_ARCHS="80;86;89;90" python setup.py bdist_wheel && \
+    MAX_JOBS=1 NVCC_THREADS=2 FLASH_ATTN_CUDA_ARCHS="90" python setup.py bdist_wheel && \
     cp dist/*.whl /out/ && \
     echo "✅ flash_attn_3 build completed"
 
