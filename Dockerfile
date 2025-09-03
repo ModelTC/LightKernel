@@ -77,22 +77,19 @@ RUN TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_p
     echo "CMAKE_PREFIX_PATH=$TORCH_CMAKE_PATH" >> /etc/environment
 
 # 🚀 GitHub Actions优化：智能设置并行度（针对2核7GB限制）
-RUN python -c "
-import os, psutil
-# GitHub Actions runner: 2核心，7GB内存
-cpu_cores = min(2, os.cpu_count())  
-available_memory_gb = min(7, psutil.virtual_memory().available / (1024**3))
-# 保守策略：每个job约3GB内存
-memory_jobs = max(1, int(available_memory_gb / 3))
-# 选择安全的并行度
-optimal_jobs = min(cpu_cores, memory_jobs, 2)
-nvcc_threads = optimal_jobs
-print(f'🎯 CI优化: MAX_JOBS={optimal_jobs}, NVCC_THREADS={nvcc_threads}')
-print(f'💾 估算资源: {available_memory_gb:.1f}GB, {cpu_cores}核')
-with open('/etc/environment', 'a') as f:
-    f.write(f'MAX_JOBS={optimal_jobs}\n')
-    f.write(f'NVCC_THREADS={nvcc_threads}\n')
-"
+RUN python -c "\
+import os, psutil; \
+cpu_cores = min(2, os.cpu_count()); \
+available_memory_gb = min(7, psutil.virtual_memory().available / (1024**3)); \
+memory_jobs = max(1, int(available_memory_gb / 3)); \
+optimal_jobs = min(cpu_cores, memory_jobs, 2); \
+nvcc_threads = optimal_jobs; \
+print(f'🎯 CI优化: MAX_JOBS={optimal_jobs}, NVCC_THREADS={nvcc_threads}'); \
+print(f'💾 估算资源: {available_memory_gb:.1f}GB, {cpu_cores}核'); \
+f = open('/etc/environment', 'a'); \
+f.write(f'MAX_JOBS={optimal_jobs}\n'); \
+f.write(f'NVCC_THREADS={nvcc_threads}\n'); \
+f.close()"
 
 # Create output directory
 RUN mkdir -p /out
