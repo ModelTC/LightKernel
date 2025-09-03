@@ -17,7 +17,8 @@ RUN chmod 777 -R /tmp && apt-get update && DEBIAN_FRONTEND=noninteractive apt-ge
     git \
     cmake \
     ninja-build \
-    build-essential && \
+    build-essential \
+    ccache && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Mambaforge
@@ -43,8 +44,16 @@ WORKDIR /workspace
 # Install PyTorch with CUDA support
 RUN pip install torch==2.7.1
 
-# Install build dependencies
-RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja
+# Install build dependencies + 构建加速工具
+RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja psutil
+
+# 🚀 设置ccache编译缓存加速
+ENV CCACHE_DIR=/tmp/ccache \
+    CCACHE_MAXSIZE=2G \
+    CCACHE_COMPRESS=true \
+    CC="ccache gcc" \
+    CXX="ccache g++"
+RUN ccache --set-config=max_size=2G
 
 # Copy source code to container
 COPY . .
@@ -59,40 +68,71 @@ RUN python -c "import torch; print(f'PyTorch installed at: {torch.__path__[0]}')
 ENV FLASH_ATTENTION_FORCE_BUILD=TRUE \
     FLASH_ATTENTION_DISABLE_BACKWARD=TRUE \
     CUDA_HOME=/usr/local/cuda \
-    CUDA_ROOT=/usr/local/cuda
+    CUDA_ROOT=/usr/local/cuda \
+    CCACHE_DISABLE=0
 
 # 🎯 关键修复：设置 CMAKE_PREFIX_PATH 让 CMake 找到 PyTorch
 RUN TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_path)") && \
     echo "export CMAKE_PREFIX_PATH=$TORCH_CMAKE_PATH:\$CMAKE_PREFIX_PATH" >> ~/.bashrc && \
     echo "CMAKE_PREFIX_PATH=$TORCH_CMAKE_PATH" >> /etc/environment
 
+# 🚀 GitHub Actions优化：智能设置并行度（针对2核7GB限制）
+RUN python -c "
+import os, psutil
+# GitHub Actions runner: 2核心，7GB内存
+cpu_cores = min(2, os.cpu_count())  
+available_memory_gb = min(7, psutil.virtual_memory().available / (1024**3))
+# 保守策略：每个job约3GB内存
+memory_jobs = max(1, int(available_memory_gb / 3))
+# 选择安全的并行度
+optimal_jobs = min(cpu_cores, memory_jobs, 2)
+nvcc_threads = optimal_jobs
+print(f'🎯 CI优化: MAX_JOBS={optimal_jobs}, NVCC_THREADS={nvcc_threads}')
+print(f'💾 估算资源: {available_memory_gb:.1f}GB, {cpu_cores}核')
+with open('/etc/environment', 'a') as f:
+    f.write(f'MAX_JOBS={optimal_jobs}\n')
+    f.write(f'NVCC_THREADS={nvcc_threads}\n')
+"
+
 # Create output directory
 RUN mkdir -p /out
 
+
+
 # Build lightllm-kernel package (main project)  
-# 🎯 关键：在构建时设置 CMAKE_PREFIX_PATH，让 CMake 找到 PyTorch
 RUN echo "🔧 Building lightllm-kernel package..." && \
     echo "📋 Verifying PyTorch installation..." && \
     python -c "import torch; print(f'PyTorch version: {torch.__version__}'); print(f'CUDA available: {torch.cuda.is_available()}'); print(f'CMake prefix path: {torch.utils.cmake_prefix_path}')" && \
+    eval $(cat /etc/environment | xargs -I {} echo export {}) && \
     TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_path)") && \
     echo "🔧 Setting CMAKE_PREFIX_PATH to: $TORCH_CMAKE_PATH" && \
+    echo "🚀 Using optimized settings: MAX_JOBS=$MAX_JOBS, NVCC_THREADS=$NVCC_THREADS" && \
     CMAKE_PREFIX_PATH="$TORCH_CMAKE_PATH:$CMAKE_PREFIX_PATH" python -m build --wheel --outdir /out/ && \
     echo "✅ lightllm-kernel build completed"
 
-# Build flash_attn_3 package (hopper)
-RUN echo "🔧 Building flash_attn_3 package..." && \
+# Build flash_attn_3 package (hopper) - 源码优化构建
+RUN echo "🔧 Building flash_attn_3 from source with optimizations..." && \
     cd flash-attention/hopper && \
-    MAX_JOBS=1 NVCC_THREADS=2 FLASH_ATTN_CUDA_ARCHS="90" python setup.py bdist_wheel && \
+    eval $(cat /etc/environment | xargs -I {} echo export {}) && \
+    echo "🚀 Optimized settings: MAX_JOBS=$MAX_JOBS, NVCC_THREADS=$NVCC_THREADS" && \
+    echo "⏰ GitHub Actions: Building within 6h time limit..." && \
+    MAX_JOBS=$MAX_JOBS NVCC_THREADS=$NVCC_THREADS FLASH_ATTN_CUDA_ARCHS=90 python setup.py bdist_wheel && \
     cp dist/*.whl /out/ && \
-    echo "✅ flash_attn_3 build completed"
+    echo "✅ flash_attn_3 optimized source build completed"
 
-# Verify all wheels are built
+# 显示编译缓存统计（如果可用）
+RUN ccache --show-stats 2>/dev/null || echo "💾 ccache stats not available"
+
+# Verify all wheels are built (源码构建验证)
 RUN echo "📦 Final wheel packages:" && \
     ls -la /out/ && \
     WHEEL_COUNT=$(ls -1 /out/*.whl | wc -l) && \
-    echo "Total wheels built: $WHEEL_COUNT" && \
+    echo "🎯 Total wheels built: $WHEEL_COUNT" && \
     if [ "$WHEEL_COUNT" -ne 2 ]; then \
-        echo "❌ Error: Expected 2 wheels, found $WHEEL_COUNT" && exit 1; \
+        echo "❌ ERROR: Expected 2 wheels (lightllm-kernel + flash_attn_3), found $WHEEL_COUNT" && \
+        echo "📋 Debug info:" && ls -la /out/ && \
+        exit 1; \
     else \
-        echo "✅ Successfully built all wheel packages"; \
-    fi 
+        echo "🎉 SUCCESS: All wheels built from optimized source compilation!"; \
+    fi && \
+    echo "🕒 Optimized build completed within GitHub Actions time limit!"
