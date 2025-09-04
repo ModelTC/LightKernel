@@ -16,7 +16,6 @@ RUN chmod 777 -R /tmp && apt-get update && DEBIAN_FRONTEND=noninteractive apt-ge
     make \
     git \
     cmake \
-    ninja-build \
     build-essential && \
     rm -rf /var/lib/apt/lists/*
 
@@ -44,7 +43,7 @@ WORKDIR /workspace
 RUN pip install torch==2.7.1
 
 # Install build dependencies
-RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja
+RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11
 
 # Copy source code to container
 COPY . .
