@@ -118,10 +118,7 @@ jobs:
           # Remove the container
           docker rm "$CONTAINER_ID"
           # Verify wheel file has been copied
-          echo "Exported wheel files:"
-          ls -la ./out
-          WHEEL_COUNT=$(ls -1 ./out/*.whl | wc -l)
-          echo "Total wheel files: $WHEEL_COUNT"
+          ls ./out
 
       - name: Upload .whl to GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
@@ -132,7 +129,7 @@ jobs:
           
           # Get wheel file information
           LIGHTKERNEL_WHEEL=$(ls ./out/lightllm_kernel-*.whl | head -n1 | xargs basename)
-          FLASH_ATTN_WHEEL=$(ls ./out/flash_attn_3-*.whl | head -n1 | xargs basename)
+          FA3_MTP_WHEEL=$(ls ./out/flash_attn_3-*.whl | head -n1 | xargs basename)
           
           gh release create "$TAG_NAME" ./out/*.whl \
             --title "LightKernel Release $TAG_NAME" \
@@ -142,20 +139,20 @@ jobs:
 
           📦 **Packages:**
           - **$LIGHTKERNEL_WHEEL** - Core CUDA kernel library  
-          - **$FLASH_ATTN_WHEEL** - Flash Attention 3.0 (Hopper)
+          - **$FA3_MTP_WHEEL** - Fa3 MTP 3.0 (Hopper)
 
           🚀 **Quick Installation:**
           \`\`\`bash
           # Install both packages
           pip install https://github.com/${{ github.repository }}/releases/download/$TAG_NAME/$LIGHTKERNEL_WHEEL
-          pip install https://github.com/${{ github.repository }}/releases/download/$TAG_NAME/$FLASH_ATTN_WHEEL
+          pip install https://github.com/${{ github.repository }}/releases/download/$TAG_NAME/$FA3_MTP_WHEEL
           \`\`\`
 
           🔧 **Build Environment:**
           - CUDA: 12.6.1 with cuDNN
           - PyTorch: 2.7.1  
           - Python: 3.10
-          - Architecture: CUDA Compute Capabilities 8.0, 8.6, 8.9, 9.0
+          - Architecture: CUDA Compute Capabilities 9.0
 
           🐳 **Docker Image:** \`${{ steps.meta.outputs.tags }}\`
           
