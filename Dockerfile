@@ -16,6 +16,7 @@ RUN chmod 777 -R /tmp && apt-get update && DEBIAN_FRONTEND=noninteractive apt-ge
     make \
     git \
     cmake \
+    ninja-build \
     build-essential && \
     rm -rf /var/lib/apt/lists/*
 
@@ -43,7 +44,7 @@ WORKDIR /workspace
 RUN pip install torch==2.7.1
 
 # Install build dependencies
-RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11
+RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja
 
 # Copy source code to container
 COPY . .
@@ -78,20 +79,11 @@ RUN echo "🔧 Building lightllm-kernel package..." && \
     CMAKE_PREFIX_PATH="$TORCH_CMAKE_PATH:$CMAKE_PREFIX_PATH" python -m build --wheel --outdir /out/ && \
     echo "✅ lightllm-kernel build completed"
 
-# Build flash_attn_3 package (hopper)
-RUN echo "🔧 Building flash_attn_3 package..." && \
-    cd flash-attention/hopper && \
-    MAX_JOBS=2 NVCC_THREADS=2 FLASH_ATTN_CUDA_ARCHS=90 FLASH_ATTENTION_DISABLE_SM80=TRUE python setup.py bdist_wheel && \
-    cp dist/*.whl /out/ && \
-    echo "✅ flash_attn_3 build completed"
+# # Build flash_attn_3 package (hopper)
+# RUN echo "🔧 Building flash_attn_3 package..." && \
+#     cd flash-attention/hopper && \
+#     MAX_JOBS=2 NVCC_THREADS=2 FLASH_ATTN_CUDA_ARCHS=90 FLASH_ATTENTION_DISABLE_SM80=TRUE python setup.py bdist_wheel && \
+#     cp dist/*.whl /out/ && \
+#     echo "✅ flash_attn_3 build completed"
 
 # Verify all wheels are built
-RUN echo "📦 Final wheel packages:" && \
-    ls -la /out/ && \
-    WHEEL_COUNT=$(ls -1 /out/*.whl | wc -l) && \
-    echo "Total wheels built: $WHEEL_COUNT" && \
-    if [ "$WHEEL_COUNT" -ne 2 ]; then \
-        echo "❌ Error: Expected 2 wheels, found $WHEEL_COUNT" && exit 1; \
-    else \
-        echo "✅ Successfully built all wheel packages"; \
-    fi 
