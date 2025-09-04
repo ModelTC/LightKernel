@@ -49,6 +49,18 @@ RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject
 # Copy source code to container
 COPY . .
 
+# Get LFS files (convert LFS pointers to actual files)
+RUN echo "📥 Fetching LFS files..." && \
+    apt-get update && apt-get install -y --no-install-recommends git-lfs && \
+    git lfs pull && \
+    echo "✅ LFS files fetched successfully" && \
+    ls -lh flash-attention/hopper/dist/*.whl && \
+    echo "🧹 Cleaning up..." && \
+    apt-get remove -y git-lfs && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "✅ Cleanup completed"
+
 # 🔧 设置 PyTorch 路径，让 CMake 能找到 Torch 配置
 # 获取 PyTorch 安装路径并设置 CMAKE_PREFIX_PATH
 RUN python -c "import torch; print(f'PyTorch installed at: {torch.__path__[0]}')" && \
