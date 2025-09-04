@@ -91,11 +91,23 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-      - name: Build and push Docker image
+      # Build and export wheels directly (fastest method)
+      - name: Build and export wheels
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: wheels  # We'll add this target to Dockerfile
+          outputs: type=local,dest=./out
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+
+      # Build and push the complete image (main stage)
+      - name: Build and push Docker image  
         id: build-and-push
         uses: docker/build-push-action@v5
         with:
           context: .
+          target: main  # 构建主阶段（完整可用镜像）
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -109,16 +121,11 @@ jobs:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
 
-      - name: Export wheel from image
+      - name: Verify exported wheels
         run: |
-          CONTAINER_TAG=$(echo "${{ steps.meta.outputs.tags }}" | head -n1)
-          CONTAINER_ID=$(docker create $CONTAINER_TAG)
-          # Copy wheel files from the container to the local machine
-          docker cp "$CONTAINER_ID:/out" ./out
-          # Remove the container
-          docker rm "$CONTAINER_ID"
-          # Verify wheel file has been copied
-          ls ./out
+          echo "Wheel files exported directly during build:"
+          ls -la ./out/
+          echo "Wheel count: $(ls -1 ./out/*.whl | wc -l)"
 
       - name: Upload .whl to GitHub Release
         if: startsWith(github.ref, 'refs/tags/')

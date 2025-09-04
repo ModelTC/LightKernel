@@ -1,5 +1,5 @@
 ARG CUDA_VERSION=12.6.1
-FROM nvidia/cuda:${CUDA_VERSION}-cudnn-devel-ubuntu22.04
+FROM nvidia/cuda:${CUDA_VERSION}-cudnn-devel-ubuntu22.04 as main
 ARG PYTHON_VERSION=3.10
 ARG MAMBA_VERSION=24.7.1-0
 ARG TARGETPLATFORM
@@ -91,4 +91,10 @@ RUN echo "📦 Using prebuilt flash_attn_3 wheel..." && \
 #     cp dist/*.whl /out/ && \
 #     echo "✅ flash_attn_3 build completed"
 
-# Verify all wheels are built
+# Install the built wheels (ready-to-use image)
+RUN pip install /out/*.whl && \
+    echo "✅ All wheels installed and ready to use"
+
+# Export stage for GitHub Actions (allows direct wheel extraction)  
+FROM scratch as wheels
+COPY --from=main /out/*.whl /
