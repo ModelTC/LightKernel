@@ -13,7 +13,10 @@ RUN chmod 777 -R /tmp && apt-get update && DEBIAN_FRONTEND=noninteractive apt-ge
     curl \
     g++ \
     make \
-    git && \
+    git \
+    cmake \
+    ninja-build \
+    build-essential && \
     rm -rf /var/lib/apt/lists/*
 
 RUN case ${TARGETPLATFORM} in \
@@ -34,7 +37,7 @@ RUN case ${TARGETPLATFORM} in \
 
 WORKDIR /root
 
-RUN pip install torch==2.7.1
+RUN pip install torch==2.7.1 numpy
 
 COPY . .
 
