@@ -79,7 +79,12 @@ RUN echo "🔧 Building lightllm-kernel package..." && \
     CMAKE_PREFIX_PATH="$TORCH_CMAKE_PATH:$CMAKE_PREFIX_PATH" python -m build --wheel --outdir /out/ && \
     echo "✅ lightllm-kernel build completed"
 
-# # Build flash_attn_3 package (hopper)
+# Use prebuilt flash_attn_3 wheel (saves ~50+ minutes!)
+RUN echo "📦 Using prebuilt flash_attn_3 wheel..." && \
+    cp flash-attention/hopper/dist/flash_attn_3-3.0.0b1-cp39-abi3-linux_x86_64.whl /out/ && \
+    echo "✅ flash_attn_3 wheel copied successfully"
+
+# Fallback: Build from source if needed (uncomment if you need to rebuild)
 # RUN echo "🔧 Building flash_attn_3 package..." && \
 #     cd flash-attention/hopper && \
 #     MAX_JOBS=2 NVCC_THREADS=2 FLASH_ATTN_CUDA_ARCHS=90 FLASH_ATTENTION_DISABLE_SM80=TRUE python setup.py bdist_wheel && \
