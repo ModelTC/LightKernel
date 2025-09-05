@@ -41,7 +41,7 @@ RUN case ${TARGETPLATFORM} in \
 WORKDIR /workspace
 
 # Install PyTorch with CUDA support
-RUN pip install torch==2.7.1
+RUN pip install torch==2.8.0
 
 # Install build dependencies
 RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja

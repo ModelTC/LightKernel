@@ -115,7 +115,7 @@ jobs:
 
           🔧 **Build Environment:**
           - CUDA: 12.6.1 with cuDNN
-          - PyTorch: 2.7.1  
+          - PyTorch: 2.8.0  
           - Python: 3.10
           - Architecture: CUDA Compute Capabilities 9.0
 
