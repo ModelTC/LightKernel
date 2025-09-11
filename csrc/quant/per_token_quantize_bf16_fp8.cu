@@ -18,7 +18,7 @@ __global__ void device_per_token_quant_bf16_to_fp8_general(
     const int32_t bid = blockIdx.x;
     const int32_t tid = threadIdx.x;
     constexpr fp32_t FP8_E4M3_MAX = 448.0f; // Maximum value representable in FP8 E4M3 format
-    
+
     const bf16_t* _input = input + bid * N; // Input pointer for the token
     fp8_e4m3_t* _output  = output + bid * N; // Output pointer for the token
 
@@ -44,15 +44,14 @@ __global__ void device_per_token_quant_bf16_to_fp8_general(
     const fp32_t reduced_max = lightllm::reduce::sm70::sync_block_reduce_max_f32<TPB>(local_max);
 
     // Compute the scale factor with epsilon to avoid division by zero
-    constexpr fp32_t epsilon = 1e-7f;
-    const fp32_t scale = reduced_max / FP8_E4M3_MAX;
-    const fp32_t inv_scale = 1.0f / (scale + epsilon);
+    constexpr fp32_t epsilon = 1.0f / (FP8_E4M3_MAX * 512.0f);
+    const fp32_t scale = fmaxf(epsilon, reduced_max / FP8_E4M3_MAX);
 
     for (int32_t i = tid; i < N; i += TPB) {
         local_bf16 = workspace1[i];
-        
+
         fp32_t tmp = cvt_bf16_f32(local_bf16);
-        fp32_t x = tmp * inv_scale;
+        fp32_t x = tmp / scale;
         local_f8 = fp8_e4m3_t(x);
 
         _output[i] = local_f8;
@@ -77,7 +76,7 @@ __global__ void device_per_token_quant_bf16_to_fp8_vpt(
     const int32_t bid = blockIdx.x;
     const int32_t tid = threadIdx.x;
     constexpr fp32_t FP8_E4M3_MAX = 448.0f; // Maximum value representable in FP8 E4M3 format
-    
+
     const bf16_t* _input = input + bid * N; // Input pointer for the token
     fp8_e4m3_t* _output  = output + bid * N; // Output pointer for the token
 
@@ -110,9 +109,8 @@ __global__ void device_per_token_quant_bf16_to_fp8_vpt(
     const fp32_t reduced_max = lightllm::reduce::sm70::sync_block_reduce_max_f32<TPB>(local_max);
 
     // Compute the scale factor with epsilon to avoid division by zero
-    constexpr fp32_t epsilon = 1e-7f;
-    const fp32_t scale = reduced_max / FP8_E4M3_MAX;
-    const fp32_t inv_scale = 1.0f / (scale + epsilon);
+    constexpr fp32_t epsilon = 1.0f / (FP8_E4M3_MAX * 512.0f);
+    const fp32_t scale = fmaxf(epsilon, reduced_max / FP8_E4M3_MAX);
 
     for (int32_t i = tid * VPT; i < N; i += TPB * VPT) {
         vec_copy<sizeof(bf16_t) * VPT>(workspace2 + (i >> 1), local_bf16);
@@ -122,10 +120,10 @@ __global__ void device_per_token_quant_bf16_to_fp8_vpt(
             fp32x2_t x = bf16x2_to_fp32x2(local_bf16[2 * j + 0]);
             fp32x2_t y = bf16x2_to_fp32x2(local_bf16[2 * j + 1]);
             fp32x4_t ret = make_float4(
-                x.x * inv_scale,
-                x.y * inv_scale,
-                y.x * inv_scale,
-                y.y * inv_scale
+                x.x / scale,
+                x.y / scale,
+                y.x / scale,
+                y.y / scale
             );
             local_f8[j] = fp8x4_e4m3_t(ret);
         }
@@ -155,7 +153,7 @@ __global__ void device_per_token_quant_bf16_to_fp8(
     const int32_t bid = blockIdx.x;
     const int32_t tid = threadIdx.x;
     constexpr fp32_t FP8_E4M3_MAX = 448.0f; // Maximum value representable in FP8 E4M3 format
-    
+
     const bf16_t* _input = input + bid * N; // Input pointer for the token
     fp8_e4m3_t* _output  = output + bid * N; // Output pointer for the token
 
@@ -188,9 +186,8 @@ __global__ void device_per_token_quant_bf16_to_fp8(
     const fp32_t reduced_max = lightllm::reduce::sm70::sync_block_reduce_max_f32<TPB>(local_max);
 
     // Compute the scale factor with epsilon to avoid division by zero
-    constexpr fp32_t epsilon = 1e-7f;
-    const fp32_t scale = reduced_max / FP8_E4M3_MAX;
-    const fp32_t inv_scale = 1.0f / (scale + epsilon);
+    constexpr fp32_t epsilon = 1.0f / (FP8_E4M3_MAX * 512.0f);
+    const fp32_t scale = fmaxf(epsilon, reduced_max / FP8_E4M3_MAX);
 
     for (int32_t i = tid * VPT; i < N; i += TPB * VPT) {
         vec_copy<sizeof(bf16_t) * VPT>(workspace + (i >> 1), local_bf16);
@@ -200,10 +197,10 @@ __global__ void device_per_token_quant_bf16_to_fp8(
             fp32x2_t x = bf16x2_to_fp32x2(local_bf16[2 * j + 0]);
             fp32x2_t y = bf16x2_to_fp32x2(local_bf16[2 * j + 1]);
             fp32x4_t ret = make_float4(
-                x.x * inv_scale,
-                x.y * inv_scale,
-                y.x * inv_scale,
-                y.y * inv_scale
+                x.x / scale,
+                x.y / scale,
+                y.x / scale,
+                y.y / scale
             );
             local_f8[j] = fp8x4_e4m3_t(ret);
         }
