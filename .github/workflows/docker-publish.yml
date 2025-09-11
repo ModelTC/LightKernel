@@ -35,7 +35,7 @@ jobs:
       - name: Add Swap
         run: |
           SWAP_FILE="/mnt/swapfile"
-          
+
           swapon --show
           echo "Trying to disable and remove existing swap if needed..."
           if swapon --show=NAME | grep -q "$SWAP_FILE"; then
@@ -85,17 +85,23 @@ jobs:
           ls -la ./out/
           echo "Wheel count: $(ls -1 ./out/*.whl | wc -l)"
 
+      - name: Upload wheels as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: wheels
+          path: ./out/*.whl
+
       - name: Upload .whl to GitHub Release
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG_NAME=${GITHUB_REF##*/}
-          
+
           # Get wheel file information
           LIGHTKERNEL_WHEEL=$(ls ./out/lightllm_kernel-*.whl | head -n1 | xargs basename)
           FA3_MTP_WHEEL=$(ls ./out/flash_attn_3-*.whl | head -n1 | xargs basename)
-          
+
           gh release create "$TAG_NAME" ./out/*.whl \
             --title "LightKernel Release $TAG_NAME" \
             --notes "🎯 **LightKernel Release $TAG_NAME**
@@ -103,7 +109,7 @@ jobs:
           This automated release contains pre-compiled wheel packages:
 
           📦 **Packages:**
-          - **$LIGHTKERNEL_WHEEL** - Core CUDA kernel library  
+          - **$LIGHTKERNEL_WHEEL** - Core CUDA kernel library
           - **$FA3_MTP_WHEEL** - Fa3 MTP 3.0 (Hopper)
 
           🚀 **Quick Installation:**
@@ -115,11 +121,11 @@ jobs:
 
           🔧 **Build Environment:**
           - CUDA: 12.6.1 with cuDNN
-          - PyTorch: 2.8.0  
+          - PyTorch: 2.8.0
           - Python: 3.10
           - Architecture: CUDA Compute Capabilities 9.0
 
 
-          
+
           Built on $(date -u)" \
-            || echo "Release already exists, skipping" 
+            || echo "Release already exists, skipping"
