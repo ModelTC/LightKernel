@@ -3,7 +3,7 @@ project(lightllm_kernel LANGUAGES CXX CUDA)
 
 # GPU 架构：缺省支持 A100(80)、Ampere(86)、Ada/L40s/4090(89)、Hopper(90)，
 if(NOT CMAKE_CUDA_ARCHITECTURES)
-  set(CMAKE_CUDA_ARCHITECTURES 80;86;89;90)
+  set(CMAKE_CUDA_ARCHITECTURES 80;86;89;90;100;100a;120;120a)
 endif()
 
 # 找 PyTorch & Python
@@ -21,7 +21,7 @@ if (NOT TARGET _C)
 
   # C++17 更方便调度宏
   target_compile_features(_C PRIVATE cxx_std_17)
-  target_include_directories(_C PRIVATE 
+  target_include_directories(_C PRIVATE
     ${TORCH_INCLUDE_DIRS}
     ${CUDAToolkit_INCLUDE_DIRS}
     ${PROJECT_SOURCE_DIR}/include
@@ -35,7 +35,7 @@ if (NOT TARGET _C)
         CUDA::cudart
         CUDA::cuda_driver)
 
-        
+
   # 输出文件名 _C.so，无前缀
   set_target_properties(_C PROPERTIES
       PREFIX ""

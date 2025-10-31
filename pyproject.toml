@@ -51,7 +51,7 @@ cmake.minimum-version = "3.22"
 cmake.build-type = "Release"
 cmake.verbose = true
 
-cmake.args = ["-DCMAKE_CUDA_ARCHITECTURES=80;86;89;90"]
+cmake.args = ["-DCMAKE_CUDA_ARCHITECTURES=80;86;89;90;100;100a;120;120a"]
 
 wheel.packages = ["lightllm_kernel"]
 wheel.license-files = ["LICENSE"]
