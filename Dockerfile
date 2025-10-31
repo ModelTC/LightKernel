@@ -1,4 +1,4 @@
-ARG CUDA_VERSION=12.6.1
+ARG CUDA_VERSION=12.8.0
 FROM nvidia/cuda:${CUDA_VERSION}-cudnn-devel-ubuntu22.04 as main
 ARG PYTHON_VERSION=3.10
 ARG MAMBA_VERSION=24.7.1-0
@@ -41,7 +41,7 @@ RUN case ${TARGETPLATFORM} in \
 WORKDIR /workspace
 
 # Install PyTorch with CUDA support
-RUN pip install torch==2.8.0
+RUN pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cu128
 
 # Install build dependencies
 RUN pip install --upgrade pip setuptools wheel build scikit-build-core[pyproject] pybind11 ninja
@@ -81,7 +81,7 @@ RUN TORCH_CMAKE_PATH=$(python -c "import torch; print(torch.utils.cmake_prefix_p
 # Create output directory
 RUN mkdir -p /out
 
-# Build lightllm-kernel package (main project)  
+# Build lightllm-kernel package (main project)
 # 🎯 关键：在构建时设置 CMAKE_PREFIX_PATH，让 CMake 找到 PyTorch
 RUN echo "🔧 Building lightllm-kernel package..." && \
     echo "📋 Verifying PyTorch installation..." && \
@@ -107,6 +107,6 @@ RUN echo "📦 Using prebuilt flash_attn_3 wheel..." && \
 RUN pip install /out/*.whl && \
     echo "✅ All wheels installed and ready to use"
 
-# Export stage for GitHub Actions (allows direct wheel extraction)  
+# Export stage for GitHub Actions (allows direct wheel extraction)
 FROM scratch as wheels
 COPY --from=main /out/*.whl /
