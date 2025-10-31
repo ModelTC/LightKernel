@@ -61,13 +61,12 @@ jobs:
       - name: Setup Docker buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Docker cache - restore
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: buildx-${{ runner.os }}-${{ github.sha }}
-          restore-keys: |
-            buildx-${{ runner.os }}-
+      # Avoid using local disk for buildx cache; use GHA cache backend
+      - name: Prune Docker to free space
+        run: |
+          docker system prune -af --volumes || true
+          rm -rf /tmp/.buildx-cache || true
+          rm -rf ./out || true
 
       # Build and export wheels directly (fastest method)
       - name: Build and export wheels
@@ -76,8 +75,8 @@ jobs:
           context: .
           target: wheels  # We'll add this target to Dockerfile
           outputs: type=local,dest=./out
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache,mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Verify exported wheels
         run: |
