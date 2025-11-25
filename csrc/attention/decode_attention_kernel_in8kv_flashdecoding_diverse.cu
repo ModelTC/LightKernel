@@ -210,11 +210,12 @@ void dynamic_batching_flashdecoding_cache_attention_int8kv_diverse_kernel(
     const int64_t head_idx      = blockIdx.x;
     const int64_t batch_idx     = blockIdx.y;
     const int64_t seq_block_idx = blockIdx.z;
-    const int64_t output_seq_block_idx = seq_block_idx + (b_shared_seq_len[batch_idx] + seq_block_size - 1) / seq_block_size;
+    const int64_t shared_seq_len = b_shared_seq_len[batch_idx];
+    const int64_t output_seq_block_idx = seq_block_idx + (shared_seq_len + seq_block_size - 1) / seq_block_size;
 
-    const int64_t seq_len = b_seq_len[batch_idx] - b_shared_seq_len[batch_idx];
+    const int64_t seq_len = b_seq_len[batch_idx] - shared_seq_len;
     const int64_t cur_req_idx = b_req_idx[batch_idx];
-    const int32_t * b_start_loc = req_to_tokens + cur_req_idx * req_to_tokens_stride + seq_block_idx * seq_block_size + b_shared_seq_len[batch_idx];
+    const int32_t * b_start_loc = req_to_tokens + cur_req_idx * req_to_tokens_stride + seq_block_idx * seq_block_size + shared_seq_len;
 
     // 向量化访问配置
     // 128-bit (16 bytes) 是最常用的向量化内存访问宽度，在所有 GPU 架构上都有良好支持
