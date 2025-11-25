@@ -94,6 +94,22 @@ void group_int8kv_flashdecoding_attention(
     Tensor b_seq_len, 
     int64_t max_len_in_batch);
 
+void group_int8kv_flashdecoding_attention_diverse(
+    const int64_t seq_block_size, 
+    Tensor mid_o_emb, 
+    Tensor mid_o_logexpsum, 
+    fp32_t att_scale, 
+    Tensor q, 
+    Tensor k, 
+    Tensor k_s,  
+    Tensor v,  
+    Tensor v_s, 
+    Tensor req_to_tokens, 
+    Tensor b_req_idx, 
+    Tensor b_seq_len, 
+    Tensor b_shared_seq_len,
+    int64_t max_len_in_batch);
+
 void group_int8kv_decode_attention(
     Tensor o, 
     Tensor q, 

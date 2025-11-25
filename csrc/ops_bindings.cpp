@@ -23,6 +23,7 @@ PYBIND11_MODULE(_C, m) {
     m.def("allgather_get_graph_buffer_ipc_meta", &allgather_get_graph_buffer_ipc_meta, "ALL GATHER GET GRAPH BUFFER IPC META (CUDA)");
     m.def("meta_size", &lightllm::ops::meta_size, "Size (in bytes) of vllm::Signal metadata");
     m.def("group8_int8kv_flashdecoding_stage1", &group_int8kv_flashdecoding_attention, "INT8KV FLASHDECODING ATTENTION (CUDA)");
+    m.def("group8_int8kv_flashdecoding_diverse_stage2", &group_int8kv_flashdecoding_attention_diverse, "INT8KV FLASHDECODING ATTENTION DIVERSE (CUDA)");
     m.def("group_int8kv_decode_attention", &group_int8kv_decode_attention, "INT8KV DECODE ATTENTION (CUDA)");
 }
 
