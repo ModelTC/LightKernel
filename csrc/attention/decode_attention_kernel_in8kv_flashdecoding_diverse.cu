@@ -210,6 +210,7 @@ void dynamic_batching_flashdecoding_cache_attention_int8kv_diverse_kernel(
     const int64_t head_idx      = blockIdx.x;
     const int64_t batch_idx     = blockIdx.y;
     const int64_t seq_block_idx = blockIdx.z;
+    const int64_t output_seq_block_idx = seq_block_idx + (b_shared_seq_len[batch_idx] + seq_block_size - 1) / seq_block_size;
 
     const int64_t seq_len = b_seq_len[batch_idx] - b_shared_seq_len[batch_idx];
     const int64_t cur_req_idx = b_req_idx[batch_idx];
@@ -435,12 +436,12 @@ void dynamic_batching_flashdecoding_cache_attention_int8kv_diverse_kernel(
 
     __syncthreads();
     
-    seq_block_idx += (b_shared_seq_len[batch_idx] + seq_block_size - 1) / seq_block_size;
+    
     for (int64_t i = threadIdx.x; i < HEAD_SIZE; i += TPB) {
-        output_emb[batch_idx * output_emb_stride_b + head_idx * output_emb_stride_h + seq_block_idx * output_emb_stride_s + i] = logits[i];
+        output_emb[batch_idx * output_emb_stride_b + head_idx * output_emb_stride_h + output_seq_block_idx * output_emb_stride_s + i] = logits[i];
     }
 
-    output_logexpsum[batch_idx * output_logexpsum_stride_b + head_idx * output_logexpsum_stride_h + seq_block_idx] = logf(exp_sum) + qk_max;
+    output_logexpsum[batch_idx * output_logexpsum_stride_b + head_idx * output_logexpsum_stride_h + output_seq_block_idx] = logf(exp_sum) + qk_max;
 }
 
 
