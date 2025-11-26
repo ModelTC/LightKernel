@@ -92,9 +92,9 @@ RUN echo "🔧 Building lightllm-kernel package..." && \
     echo "✅ lightllm-kernel build completed"
 
 # Use prebuilt flash_attn_3 wheel (saves ~50+ minutes!)
-RUN echo "📦 Using prebuilt flash_attn_3 wheel..." && \
-    cp flash-attention/hopper/dist/flash_attn_3-3.0.0b1-cp39-abi3-linux_x86_64.whl /out/ && \
-    echo "✅ flash_attn_3 wheel copied successfully"
+# RUN echo "📦 Using prebuilt flash_attn_3 wheel..." && \
+#     cp flash-attention/hopper/dist/flash_attn_3-3.0.0b1-cp39-abi3-linux_x86_64.whl /out/ && \
+#     echo "✅ flash_attn_3 wheel copied successfully"
 
 # Fallback: Build from source if needed (uncomment if you need to rebuild)
 # RUN echo "🔧 Building flash_attn_3 package..." && \
