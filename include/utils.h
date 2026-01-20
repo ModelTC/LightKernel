@@ -62,6 +62,17 @@ __device__ inline fp32x2_t bf16x2_to_fp32x2(bf16x2_t bf16x2_val) {
     return make_float2(low_f, high_f);
 }
 
+// fp16x2 to fp32x2 conversion
+__device__ inline fp32x2_t fp16x2_to_fp32x2(fp16x2_t fp16x2_val) {
+    fp16_t low = __low2half(fp16x2_val);
+    fp16_t high = __high2half(fp16x2_val);
+
+    float low_f = __half2float(low);
+    float high_f = __half2float(high);
+
+    return make_float2(low_f, high_f);
+}
+
 __device__ inline bf16x2_t _float22bf162_rn(fp32x2_t val) {
     bf16_t low = __float2bfloat16(val.x);
     bf16_t high = __float2bfloat16(val.y);
